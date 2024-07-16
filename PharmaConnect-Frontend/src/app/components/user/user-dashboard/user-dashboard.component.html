@@ -1,0 +1,43 @@
+<div class="grid-container">
+    <h1 class="mat-h1">Reservations</h1>
+</div>
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<ng-container *ngIf="!isLoading">
+    <div *ngIf="!reservations || reservations.length === 0" class="no-orders">
+        No reservations found.
+    </div>
+    <div *ngIf="reservations && reservations.length > 0">
+        <div *ngFor="let reservation of reservations,index as i" class="list">
+            <mat-expansion-panel expanded="true">
+                <mat-expansion-panel-header [collapsedHeight]="'120px'" [expandedHeight]="'120px'">
+                    <mat-panel-title>
+                        <a class="order-name" (click)="onOrderItemClick(reservation.bookingID)">{{reservation.drugName}}</a> <br/>
+                        <div>Purchased from {{reservation.storeName}}</div>
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Order Placed <p class="booking-header-info">{{reservation.lockAcquiredTime.split('T')[0] + " " + reservation.lockAcquiredTime.split('T')[1]}}</p>
+                    </mat-panel-description>
+                    <mat-panel-description>
+                        Reserved Until <p class="booking-header-info">{{reservation.releaseTime.split('T')[0] + " " + reservation.releaseTime.split('T')[1]}}</p>
+                    </mat-panel-description>
+                    <mat-panel-description>
+                        Total <p class="booking-header-info">${{reservation.unitPrice * reservation.quantityNeeded}} CAD</p>
+                    </mat-panel-description>
+                    <mat-panel-description>
+                        <div>
+                            Status 
+                            <p style="color: orange;">Pending for pickup</p>
+                        </div>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="order-content">
+                    <p>Order # {{reservation.reservationId}}</p>
+                    <p>Store : {{reservation.storeName}}</p>
+                    <p>Quantity : {{reservation.quantityNeeded}}</p>
+                    <p>Unit Price : ${{reservation.unitPrice}}</p>
+                    <p>Total Price : ${{reservation.unitPrice * reservation.quantityNeeded}}</p>
+                </div>
+            </mat-expansion-panel>
+        </div>
+    </div>
+</ng-container>

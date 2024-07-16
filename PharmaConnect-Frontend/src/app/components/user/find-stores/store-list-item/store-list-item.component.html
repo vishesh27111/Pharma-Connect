@@ -1,0 +1,29 @@
+<div class="list-item">
+    <h1><a href="{{store.websiteUri}}" target="_blank">{{store.displayName.text}}</a></h1>
+    <div *ngIf="store.formattedAddress" class="address">
+        <mat-icon aria-hidden="false" aria-label="Home icon" fontIcon="home"></mat-icon>
+        <p>{{store.formattedAddress}}</p>
+    </div>
+    <div *ngIf="store.internationalPhoneNumber" class="phone">
+        <mat-icon aria-hidden="false" aria-label="Phone icon" fontIcon="phone"></mat-icon>
+        <p>{{store.internationalPhoneNumber}}</p>
+    </div>
+    <div *ngIf="store.rating" class="rating">
+        <mat-icon aria-hidden="false" aria-label="Star icon" fontIcon="star"></mat-icon>
+        <p><b>{{store.rating}}</b> stars on Google</p>
+    </div>
+    <div *ngIf="store.googleMapsUri" class="location">
+        <mat-icon aria-hidden="false" aria-label="Location icon" fontIcon="location_on"></mat-icon>
+        <p><a href="{{store.googleMapsUri}}" target="_blank">{{store.googleMapsUri}}</a></p>
+    </div>
+    <div class="isOpen">
+        <div class="open" *ngIf="store.regularOpeningHours && store.regularOpeningHours.openNow">
+            <mat-icon aria-hidden="false" aria-label="Clock icon" fontIcon="watch"></mat-icon>
+            <p class="open"><b>Open Now</b></p>
+        </div>
+        <div class="closed" *ngIf="store.regularOpeningHours && !store.regularOpeningHours.openNow">
+            <mat-icon aria-hidden="false" aria-label="Clock icon" fontIcon="watch"></mat-icon>
+            <p class="closed"><b>Closed</b></p>
+        </div>
+    </div>
+</div>

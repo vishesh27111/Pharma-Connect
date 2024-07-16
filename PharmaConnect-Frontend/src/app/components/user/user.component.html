@@ -1,0 +1,32 @@
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #drawer class="sidenav" fixedInViewport
+        [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+        [mode]="(isHandset$ | async) ? 'over' : 'side'"
+        [opened]="(isHandset$ | async) === false">
+      <mat-toolbar>Menu</mat-toolbar>
+      <mat-nav-list>
+        <a mat-list-item class="menu-item" (click)="onReservationsClick()"><mat-icon>alarm</mat-icon>
+          Reservations</a>
+        <a mat-list-item class="menu-item" (click)="onOrderClick()"><mat-icon>check_circle</mat-icon>My Orders</a>
+        <a mat-list-item class="menu-item" (click)="onMedicineClick()"><mat-icon> local_pharmacy</mat-icon>Find Medicines</a>
+        <a mat-list-item class="menu-item" (click)="onDonateClick()"><mat-icon>face</mat-icon>Donate Blood</a>
+        <a mat-list-item class="menu-item" (click)="onFindStoresClick()"><mat-icon> place</mat-icon>Find Stores</a>
+        <a mat-list-item class="menu-item" (click)="onProfileClick()"><mat-icon>account_circle</mat-icon>Profile</a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content  class="sticky">
+      <mat-toolbar color="primary">
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="drawer.toggle()"
+          *ngIf="isHandset$ | async">
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+        <span>PharmaConnect</span>
+      </mat-toolbar>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  

@@ -1,0 +1,7 @@
+<div class="products-page">
+    <div class="heading">
+      <h1 class="mat-h1">Products</h1>
+      <button mat-raised-button color="primary" (click)="AddDialog()">Add new</button>
+    </div>
+    <paginated-table-products [data]="storeDrugs" (updateEvent)="UpdateDialog($event)" (deleteEvent)="DeleteDialog($event)"></paginated-table-products>
+  </div>

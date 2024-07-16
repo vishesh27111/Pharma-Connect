@@ -1,0 +1,153 @@
+<div class="profile-page">
+    <div class="heading">
+      <h1 class="mat-h1">Profile</h1>
+      <button mat-raised-button color="warn" (click)="logout()">Logout</button>
+    </div>
+
+    <div>
+        <form [formGroup]="storeProfileForm" (ngSubmit)="save()"> 
+            <!-- <div class="form-group mb-3">
+                <label for="storeName">Store Name</label>
+                <input formControlName="storeName" type="text" class="form-control" id="storeName" placeholder="Enter the store name">
+                <div class="error-message" *ngIf="submitted && storeProfileForm.get('storeName')?.errors?.['required']">Please provide store name</div>
+            </div> -->
+            <div class="form-group mb-3">
+                <label for="storeName">Store Name</label>
+                <input formControlName="storeName" type="text" class="form-control" id="storeName" placeholder="Enter the store name">
+                <div class="error-message" *ngIf="submitted && storeProfileForm.get('storeName')?.errors?.['required']">Please provide store name</div>
+            </div>
+            <div class="form-group mb-3">
+                <label for="managerName">Manager Name</label>
+                <input formControlName="managerName" type="text" class="form-control" id="managerName" placeholder="Enter the manager name">
+                <div class="error-message" *ngIf="submitted && storeProfileForm.get('managerName')?.errors?.['required']">Please provide manager name</div>
+            </div>
+            <div class="form-group mb-3">
+                <label for="email">Email address</label>
+                <input formControlName="email" type="email" class="form-control" id="email" placeholder="Enter email">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                <div class="error-message" *ngIf="submitted && storeProfileForm.get('email')?.errors?.['required']">Please provide email address</div>
+            </div>
+            <div class="form-group mb-3">
+                <label for="mobile">Mobile Number</label>
+                <input formControlName="mobile" type="text" class="form-control" id="mobile" placeholder="Enter phone">
+                <div class="error-message" *ngIf="submitted && storeProfileForm.get('mobile')?.errors?.['required']">Please provide mobile number</div>
+            </div>
+            <div class="form-group mb-3">
+                <label for="address">Address</label>
+                <input formControlName="address" type="text" class="form-control" id="address" placeholder="Your Address">
+                <div class="error-message" *ngIf="submitted && storeProfileForm.get('address')?.errors?.['required']">Please provide Address</div>
+            </div>
+            <div class="form-group mb-3">
+                <label for="zip">Zipcode</label>
+                <input formControlName="zip" type="text" class="form-control" id="zip" placeholder="Zipcode">
+                <div class="error-message" *ngIf="submitted && storeProfileForm.get('zip')?.errors?.['required']">Please provide Zipcode</div>
+            </div>
+            <div class="form-group mb-3">
+                <label for="registrationNumber">Registration Number</label>
+                <input formControlName="registrationNumber" type="text" class="form-control" id="registrationNumber" placeholder="Enter the store's registration number">
+                <div class="error-message" *ngIf="submitted && storeProfileForm.get('registrationNumber')?.errors?.['required']">Please provide store registration number</div>
+            </div>
+            <div class="form-group mb-3">
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        Working Hours
+                      </mat-panel-title>
+                    </mat-expansion-panel-header>
+                
+                    <div class="working-hours-section">
+                        <mat-checkbox class="checkbox-margin" color="primary" (change)="onWorkingHoursUpdate('monday')" [(ngModel)]="storeProfileForm.get('monday')?.value.isOpen" [ngModelOptions]="{standalone: true}">Monday</mat-checkbox>
+                        
+                        <input [ngxTimepicker]="mondayFrom" [(ngModel)]="storeProfileForm.get('monday')?.value.from" [ngModelOptions]="{standalone: true}" [disabled]="!storeProfileForm.get('monday')?.value.isOpen">
+                        <ngx-material-timepicker #mondayFrom></ngx-material-timepicker>
+                        <div class="to"> to </div>
+                        <input [ngxTimepicker]="mondayTo" [(ngModel)]="storeProfileForm.get('monday')?.value.to" [ngModelOptions]="{standalone: true}" [disabled]="!storeProfileForm.get('monday')?.value.isOpen">
+                        <ngx-material-timepicker #mondayTo></ngx-material-timepicker>
+                    </div>
+                    <div class="working-hours-section">
+                        <mat-checkbox class="checkbox-margin" color="primary" (change)="onWorkingHoursUpdate('tuesday')" [(ngModel)]="storeProfileForm.get('tuesday')?.value.isOpen" [ngModelOptions]="{standalone: true}">Tuesday</mat-checkbox>
+                        
+                        <input [ngxTimepicker]="tuesdayFrom" [(ngModel)]="storeProfileForm.get('tuesday')?.value.from" [ngModelOptions]="{standalone: true}" [disabled]="!storeProfileForm.get('tuesday')?.value.isOpen">
+                        <ngx-material-timepicker #tuesdayFrom></ngx-material-timepicker>
+                        <div class="to"> to </div>
+                        <input [ngxTimepicker]="tuesdayTo" [(ngModel)]="storeProfileForm.get('tuesday')?.value.to" [ngModelOptions]="{standalone: true}" [disabled]="!storeProfileForm.get('tuesday')?.value.isOpen">
+                        <ngx-material-timepicker #tuesdayTo></ngx-material-timepicker>
+                    </div>
+                    <div class="working-hours-section">
+                        <mat-checkbox class="checkbox-margin" color="primary" (change)="onWorkingHoursUpdate('wednesday')" [(ngModel)]="storeProfileForm.get('wednesday')?.value.isOpen" [ngModelOptions]="{standalone: true}">Wednesday</mat-checkbox>
+                        
+                        <input [ngxTimepicker]="wednesdayFrom" [(ngModel)]="storeProfileForm.get('wednesday')?.value.from" [ngModelOptions]="{standalone: true}" [disabled]="!storeProfileForm.get('wednesday')?.value.isOpen">
+                        <ngx-material-timepicker #wednesdayFrom></ngx-material-timepicker>
+                        <div class="to"> to </div>
+                        <input [ngxTimepicker]="wednesdayTo" [(ngModel)]="storeProfileForm.get('wednesday')?.value.to" [ngModelOptions]="{standalone: true}" [disabled]="!storeProfileForm.get('wednesday')?.value.isOpen">
+                        <ngx-material-timepicker #wednesdayTo></ngx-material-timepicker>
+                    </div>
+                    <div class="working-hours-section">
+                        <mat-checkbox class="checkbox-margin" color="primary" (change)="onWorkingHoursUpdate('thursday')" [(ngModel)]="storeProfileForm.get('thursday')?.value.isOpen" [ngModelOptions]="{standalone: true}">Thursday</mat-checkbox>
+                        
+                        <input [ngxTimepicker]="thursdayFrom" [(ngModel)]="storeProfileForm.get('thursday')?.value.from" [ngModelOptions]="{standalone: true}" [disabled]="!storeProfileForm.get('thursday')?.value.isOpen">
+                        <ngx-material-timepicker #thursdayFrom></ngx-material-timepicker>
+                        <div class="to"> to </div>
+                        <input [ngxTimepicker]="thursdayTo" [(ngModel)]="storeProfileForm.get('thursday')?.value.to" [ngModelOptions]="{standalone: true}" [disabled]="!storeProfileForm.get('thursday')?.value.isOpen">
+                        <ngx-material-timepicker #thursdayTo></ngx-material-timepicker>
+                    </div>
+                    <div class="working-hours-section">
+                        <mat-checkbox class="checkbox-margin" color="primary" (change)="onWorkingHoursUpdate('friday')" [(ngModel)]="storeProfileForm.get('friday')?.value.isOpen" [ngModelOptions]="{standalone: true}">Friday</mat-checkbox>
+                        
+                        <input [ngxTimepicker]="fridayFrom" [(ngModel)]="storeProfileForm.get('friday')?.value.from" [ngModelOptions]="{standalone: true}" [disabled]="!storeProfileForm.get('friday')?.value.isOpen">
+                        <ngx-material-timepicker #fridayFrom></ngx-material-timepicker>
+                        <div class="to"> to </div>
+                        <input [ngxTimepicker]="fridayTo" [(ngModel)]="storeProfileForm.get('friday')?.value.to" [ngModelOptions]="{standalone: true}" [disabled]="!storeProfileForm.get('friday')?.value.isOpen">
+                        <ngx-material-timepicker #fridayTo></ngx-material-timepicker>
+                    </div>
+                    <div class="working-hours-section">
+                        <mat-checkbox class="checkbox-margin" color="primary" (change)="onWorkingHoursUpdate('saturday')" [(ngModel)]="storeProfileForm.get('saturday')?.value.isOpen"[ngModelOptions]="{standalone: true}">Saturday</mat-checkbox>
+                        
+                        <input [ngxTimepicker]="saturdayFrom" [(ngModel)]="storeProfileForm.get('saturday')?.value.from" [ngModelOptions]="{standalone: true}" [disabled]="!storeProfileForm.get('saturday')?.value.isOpen">
+                        <ngx-material-timepicker #saturdayFrom></ngx-material-timepicker>
+                        <div class="to"> to </div>
+                        <input [ngxTimepicker]="saturdayTo" [(ngModel)]="storeProfileForm.get('saturday')?.value.to" [ngModelOptions]="{standalone: true}" [disabled]="!storeProfileForm.get('saturday')?.value.isOpen">
+                        <ngx-material-timepicker #saturdayTo></ngx-material-timepicker>
+                    </div>
+                    <div class="working-hours-section">
+                        <mat-checkbox class="checkbox-margin" color="primary" (change)="onWorkingHoursUpdate('sunday')" [(ngModel)]="storeProfileForm.get('sunday')?.value.isOpen" [ngModelOptions]="{standalone: true}">Sunday</mat-checkbox>
+                        
+                        <input [ngxTimepicker]="sundayFrom" [(ngModel)]="storeProfileForm.get('sunday')?.value.from" [ngModelOptions]="{standalone: true}" [disabled]="!storeProfileForm.get('sunday')?.value.isOpen">
+                        <ngx-material-timepicker #sundayFrom></ngx-material-timepicker>
+                        <div class="to"> to </div>
+                        <input [ngxTimepicker]="sundayTo" [(ngModel)]="storeProfileForm.get('sunday')?.value.to" [ngModelOptions]="{standalone: true}" [disabled]="!storeProfileForm.get('sunday')?.value.isOpen">
+                        <ngx-material-timepicker #sundayTo></ngx-material-timepicker>
+                    </div>
+                </mat-expansion-panel>
+            </div>
+            <mat-expansion-panel class="form-group mb-3">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Change Password
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <form [formGroup]="storeUpdatePassword">
+                    <div class="form-group mb-3">
+                        <label for="password">Current Password</label>
+                        <input formControlName="currentPassword" type="password" class="form-control" id="currentPassword" placeholder="Current Password">
+                        <small id="passwordHelp" class="form-text text-muted">Password must contain minimum 8 and maximum 16 characters, one Uppercase, one Lowercase, one Number and one special chaarcter.</small>
+                        <div class="error-message" *ngIf="submitted && storeUpdatePassword.get('password')?.errors?.['required']">Please provide password</div>
+                        <div class="error-message" *ngIf="submitted && storeUpdatePassword.get('password')?.errors?.['pattern']">Password must contain an uppercase, lowercase, number and special character.</div>
+                        <div class="error-message" *ngIf="submitted && storeUpdatePassword.get('password')?.errors?.['minLength']">Password must contain atleast 8 characters.</div>
+                        <div class="error-message" *ngIf="submitted && storeUpdatePassword.get('password')?.errors?.['maxLength']">Password must contain max 16 characters.</div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="password">New Password</label>
+                        <input formControlName="newPassword" type="password" class="form-control" id="newPassword" placeholder="New Password">
+                        <small id="passwordHelp" class="form-text text-muted">Password must contain minimum 8 and maximum 16 characters, one Uppercase, one Lowercase, one Number and one special chaarcter.</small>
+                        <div class="error-message" *ngIf="submitted && storeUpdatePassword.get('password')?.errors?.['required']">Please provide password</div>
+                        <div class="error-message" *ngIf="submitted && storeUpdatePassword.get('password')?.errors?.['pattern']">Password must contain an uppercase, lowercase, number and special character.</div>
+                        <div class="error-message" *ngIf="submitted && storeUpdatePassword.get('password')?.errors?.['minLength']">Password must contain atleast 8 characters.</div>
+                        <div class="error-message" *ngIf="submitted && storeUpdatePassword.get('password')?.errors?.['maxLength']">Password must contain max 16 characters.</div>
+                    </div>
+                </form>
+            </mat-expansion-panel>
+            <button type="submit" class="btn btn-primary submit-btn">Save</button>
+        </form>
+    </div>
+  </div>

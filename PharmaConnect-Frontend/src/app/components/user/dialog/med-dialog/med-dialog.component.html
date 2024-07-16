@@ -1,0 +1,20 @@
+<div class="title">
+<h2 mat-dialog-title>{{data.drug_name}}</h2>
+<mat-icon class="cross" (click)="close()">close</mat-icon>
+</div>
+<mat-dialog-content class="mat-typography">
+    <h2 class="subtitle">Details</h2>
+    <div class="details">
+        <ul>
+            <li><b>Company:</b> {{data.company_name}}</li>
+            <li><b>Drug Code:</b> {{data.code}}</li>
+            <li><b>Avg. Unit Price:</b> ${{data.unit_price}}</li>
+            <!-- <li><b>Expiry:</b> {{data.expiration_date}}</li> -->
+            <li *ngIf="data.prescription==1 " style="color:red">Prescription required</li>
+        </ul>
+    </div>
+
+  <h2 class="subtitle">Description</h2>
+  <p>{{data.description}}</p>
+
+</mat-dialog-content>

@@ -1,0 +1,47 @@
+<div class="grid-container">
+    <h1 class="mat-h1">My Orders</h1>
+</div>
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<ng-container *ngIf="!isLoading">
+    <div *ngIf="!orders || orders.length === 0" class="no-orders">
+        No orders found.
+    </div>
+    <div *ngIf="orders && orders.length > 0">
+        <div *ngFor="let order of orders,index as i" class="list">
+            <mat-expansion-panel expanded="true">
+                <mat-expansion-panel-header [collapsedHeight]="'120px'" [expandedHeight]="'120px'">
+                    <mat-panel-title>
+                        <a class="order-name" (click)="onOrderItemClick(order.bookingID)">{{order.drugName}}</a> <br/>
+                        <div>Purchased from {{order.storeName}}</div>
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Order Placed <p class="booking-header-info">{{order.lockAcquiredTime.split('T')[0] + " " + order.lockAcquiredTime.split('T')[1]}}</p>
+                    </mat-panel-description>
+                    <mat-panel-description>
+                        Reserved Until <p class="booking-header-info">{{order.releaseTime.split('T')[0] + " " + order.releaseTime.split('T')[1]}}</p>
+                    </mat-panel-description>
+                    <mat-panel-description>
+                        Total <p class="booking-header-info">${{order.unitPrice * order.quantityNeeded}} CAD</p>
+                    </mat-panel-description>
+                    <mat-panel-description>
+                        <!-- <div class="status-bar">
+                            <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+                        </div> -->
+                        <div>
+                            Status 
+                            <p *ngIf="order.status.toLowerCase() === 'purchase'" style="color: green;">Completed</p>
+                            <p *ngIf="order.status.toLowerCase() === 'release'" style="color: red;">Cancelled</p>
+                        </div>
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div class="order-content">
+                    <p>Order # {{order.reservationId}}</p>
+                    <p>Store : {{order.storeName}}</p>
+                    <p>Quantity : {{order.quantityNeeded}}</p>
+                    <p>Unit Price : ${{order.unitPrice}}</p>
+                    <p>Total Price : ${{order.unitPrice * order.quantityNeeded}}</p>
+                </div>
+            </mat-expansion-panel>
+        </div>
+    </div>
+</ng-container>

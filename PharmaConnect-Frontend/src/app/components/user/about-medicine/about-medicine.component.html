@@ -1,0 +1,117 @@
+<div *ngIf="!buyNowClicked">
+    <div class="searchbar">
+        <div class="header-left">
+            <h1 class="mat-h1">Find Medicines</h1>
+        </div>
+        <div class="header-right">
+            <div *ngIf="filteredData?.length">* indicates prescription required</div>
+            <input type="text" placeholder="Search" class="search-box" [(ngModel)]="searchTerm" (input)="onSearch()">
+        </div>
+    </div>
+
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+        <ng-container *ngIf="!isLoading">
+        <div class="board">
+            <mat-card *ngFor="let drug of filteredData" class="dashboard-card">
+                <mat-card-header>
+                    <div class="left">
+                        <mat-card-title class="dashboard-card-title">
+                            <div class="medicine-name">
+                                {{drug.drug_name}}
+                                <span *ngIf="drug.prescription==1">*</span>
+                            </div>
+                        </mat-card-title>
+                        <mat-card-subtitle>
+                            <div>{{drug.company_name}}</div>
+                            <a class="more-info" (click)="LearnMore(drug)">Learn More</a>
+                        </mat-card-subtitle>
+                    </div>
+                    <div class="right">
+                        Avg. Price
+                        <mat-card-title class="dashboard-card-title">
+                            <div class="medicine-price">
+                                ${{drug.unit_price}}
+                            </div>
+                        </mat-card-title>
+                        <button mat-raised-button color="primary" (click)="findStoresForDrugs(drug)">Find Store</button>
+                    </div>
+                </mat-card-header>
+                <mat-card-content class="dashboard-card-content">
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </ng-container>
+</div>
+
+<div *ngIf="buyNowClicked" class="checkout">
+    <div class="path">
+        <h1><mat-icon style="font-size: 32px;" (click)="med_list()">keyboard_arrow_left</mat-icon><span style="margin-left: 25px;">{{buy_med.drug_name}}</span></h1>
+        <h4 style="color: gray; margin-left: 25px;"><span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{buy_med.company_name}}</span></h4>
+        <hr/>
+    </div>
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+    <div *ngIf="!isLoading">
+        <h1 class="mat-h1">Available at</h1>
+        <div class="board">
+            <mat-card *ngFor="let store of filteredStores" class="dashboard-card">
+                <mat-card-header>
+                    <div class="left">
+                        <mat-card-title class="dashboard-card-title">
+                            <div class="medicine-name">
+                                {{store.store_name}}
+                            </div>
+                        </mat-card-title>
+                        <mat-card-subtitle>
+                            <div>{{store.address}}, {{store.zipcode}}</div>
+                            <div><a class="more-info" (click)="KnowMore(store)">Know More</a></div>
+                        </mat-card-subtitle>
+                    </div>
+                    <div class="right">
+                        <mat-card-title class="dashboard-card-title">
+                            <div class="medicine-price-zoomed">
+                                ${{store.unit_price}}
+                            </div>
+                        </mat-card-title>
+                        <div *ngIf="store.quantity >= 10">
+                            {{store.quantity}} units left
+                        </div>
+                        <div *ngIf="store.quantity >= 5 && store.quantity < 10" style="color: #ffb302; margin-top: 5px;">
+                            {{store.quantity}} units left
+                        </div>
+                        <div *ngIf="store.quantity >= 0 && store.quantity < 5" style="color: red; margin-top: 5px;">
+                            {{store.quantity}} units left
+                        </div>
+                    </div>
+                </mat-card-header>
+                <mat-card-content class="dashboard-card-content">
+                    <hr/>
+                    <div class="store-section" style="align-items: center;">
+                        <div>
+                            <mat-label>Quantity</mat-label>
+                            <input type="number" matInput class="input-box-margins" min="1" style="width: 5em;" [(ngModel)]="store.bookQuantity">
+                        </div>
+                        <div>
+                            <mat-label>Reserve for (in mins.)</mat-label>
+                            <input type="number" matInput class="input-box-margins" min="10" style="width: 10em;" [(ngModel)]="store.lockAcquiredTime">
+                        </div>
+                        <button mat-raised-button color="primary" (click)="reserveDrug(store)">Reserve</button>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </div>
+    </div>
+    <!-- <div class="board-med">
+        
+        <mat-card *ngFor="let store of filteredStores" class="dashboard-card">
+            <mat-card-header>
+                <mat-card-title class="dashboard-card-title">
+                    {{store.store_name}}
+                </mat-card-title>
+            </mat-card-header>
+            <hr>
+            <mat-card-content class="dashboard-card-content">
+                ${{store.unit_price}}
+            </mat-card-content>
+        </mat-card>
+    </div> -->
+</div>

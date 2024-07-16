@@ -1,0 +1,26 @@
+<div class="grid-container">
+  <h1 class="mat-h1">Dashboard</h1>
+  <mat-grid-list cols="{{ ( cardLayout | async )?.columns }}" rowHeight="200px">
+    <!--Charts-->
+    <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols" [rowspan]="( cardLayout | async )?.chart?.rows">
+      <app-card title="Monthly Revenue">
+          <app-annual-sale-chart></app-annual-sale-chart>
+      </app-card>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols" [rowspan]="( cardLayout | async )?.chart?.rows">
+      <app-card title="Best-Selling Product Categories">
+          <app-best-selling-products></app-best-selling-products>
+      </app-card>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="( cardLayout | async )?.chart?.cols" [rowspan]="( cardLayout | async )?.chart?.rows">
+      <app-card title="Customer Information">
+          <app-customer-information></app-customer-information>
+      </app-card>
+    </mat-grid-tile>
+  </mat-grid-list>
+ </div>
+
+ <div class="chartContainer">
+  <canvas baseChart width="400" height="400">
+  </canvas>
+</div>

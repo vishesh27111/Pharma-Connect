@@ -1,0 +1,71 @@
+<div class="profile-page">
+    <div class="heading">
+      <h1 class="mat-h1">Profile</h1>
+      <button mat-raised-button color="warn" (click)="logout()">Logout</button>
+    </div>
+
+    <div>
+        <form [formGroup]="customerProfileForm" (ngSubmit)="save()"> 
+            <div class="form-group mb-3">
+                <label for="fullname">Full Name</label>
+                <input formControlName="fullname" type="text" class="form-control" id="fullname" placeholder="Enter your name">
+                <div class="error-message" *ngIf="submitted && customerProfileForm.get('fullname')?.errors?.['required']">Please provide full name</div>
+            </div>
+            <div class="form-group mb-3">
+                <label for="email">Email address</label>
+                <input formControlName="email" type="email" class="form-control" id="email" placeholder="Enter email">
+                <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                <div class="error-message" *ngIf="submitted && customerProfileForm.get('email')?.errors?.['required']">Please provide email address</div>
+            </div>
+            <div class="form-group mb-3">
+                <label for="mobile">Mobile Number</label>
+                <input formControlName="mobile" type="text" class="form-control" id="mobile" placeholder="Enter phone">
+                <div class="error-message" *ngIf="submitted && customerProfileForm.get('mobile')?.errors?.['required']">Please provide mobile number</div>
+            </div>
+            <div class="form-group mb-3">
+                <label for="dob">Date of Birth</label>
+                <input formControlName="dob" type="date" class="form-control" id="dob" placeholder="Date of Birth">
+                <div class="error-message" *ngIf="submitted && customerProfileForm.get('dob')?.errors?.['required']">Please provide Date of Birth</div>
+            </div>
+            <div class="form-group mb-3">
+                <label for="address">Address</label>
+                <input formControlName="address" type="text" class="form-control" id="address" placeholder="Your Address">
+                <div class="error-message" *ngIf="submitted && customerProfileForm.get('address')?.errors?.['required']">Please provide Address</div>
+            </div>
+            <div class="form-group mb-3">
+                <label for="zip">Zipcode</label>
+                <input formControlName="zip" type="text" class="form-control" id="zip" placeholder="Zipcode">
+                <div class="error-message" *ngIf="submitted && customerProfileForm.get('zip')?.errors?.['required']">Please provide Zipcode</div>
+            </div>
+
+            <mat-expansion-panel class="form-group mb-3">
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                    Change Password
+                  </mat-panel-title>
+                </mat-expansion-panel-header>
+                <form [formGroup]="customerUpdatePassword"> 
+                    <div class="form-group mb-3">
+                        <label for="password">Current Password</label>
+                        <input formControlName="currentPassword" type="password" class="form-control" id="currentPassword" placeholder="Current Password">
+                        <small id="passwordHelp" class="form-text text-muted">Password must contain minimum 8 and maximum 16 characters, one Uppercase, one Lowercase, one Number and one special chaarcter.</small>
+                        <div class="error-message" *ngIf="submitted && customerProfileForm.get('password')?.errors?.['required']">Please provide password</div>
+                        <div class="error-message" *ngIf="submitted && customerProfileForm.get('password')?.errors?.['pattern']">Password must contain an uppercase, lowercase, number and special character.</div>
+                        <div class="error-message" *ngIf="submitted && customerProfileForm.get('password')?.errors?.['minLength']">Password must contain atleast 8 characters.</div>
+                        <div class="error-message" *ngIf="submitted && customerProfileForm.get('password')?.errors?.['maxLength']">Password must contain max 16 characters.</div>
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="password">New Password</label>
+                        <input formControlName="newPassword" type="password" class="form-control" id="newPassword" placeholder="New Password">
+                        <small id="passwordHelp" class="form-text text-muted">Password must contain minimum 8 and maximum 16 characters, one Uppercase, one Lowercase, one Number and one special chaarcter.</small>
+                        <div class="error-message" *ngIf="submitted && customerProfileForm.get('password')?.errors?.['required']">Please provide password</div>
+                        <div class="error-message" *ngIf="submitted && customerProfileForm.get('password')?.errors?.['pattern']">Password must contain an uppercase, lowercase, number and special character.</div>
+                        <div class="error-message" *ngIf="submitted && customerProfileForm.get('password')?.errors?.['minLength']">Password must contain atleast 8 characters.</div>
+                        <div class="error-message" *ngIf="submitted && customerProfileForm.get('password')?.errors?.['maxLength']">Password must contain max 16 characters.</div>
+                    </div>
+                </form>
+            </mat-expansion-panel>
+            <button type="submit" class="btn btn-primary submit-btn">Save</button>
+            </form>
+    </div>
+  </div>

@@ -1,0 +1,25 @@
+<h1 mat-dialog-title>Update Medicine</h1>
+<div mat-dialog-content>
+    <form [formGroup]="UpdateMedForm">
+        <mat-form-field>
+            <mat-label>Drug Code</mat-label>
+            <input matInput formControlName="code" id="code">
+        </mat-form-field><br/>
+        <mat-form-field>
+            <mat-label>Drug Name</mat-label>
+            <input matInput formControlName="medicineName" id="medicineName">
+        </mat-form-field><br/>
+        <mat-form-field>
+            <mat-label>Quantity</mat-label>
+            <input matInput formControlName="quantity" type="number" id="quantity" min="1">
+        </mat-form-field><br/>
+        <mat-form-field>
+            <mat-label>Unit Price</mat-label>
+            <input matInput formControlName="unit_price" type="number" id="unit_price" min="0">
+        </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="close()">Close</button>
+  <button mat-button (click)="save()" cdkFocusInitial>Save</button>
+</div>

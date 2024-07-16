@@ -1,0 +1,33 @@
+<form [formGroup]="DonateBloodForm">
+    <label for="first-name">First Name: </label>
+    <input matInput id="first-name" type="text" formControlName="firstName">
+  
+    <label for="last-name">Last Name: </label>
+    <input matInput id="last-name" type="text" formControlName="lastName">
+
+    <label for="address">Address: </label>
+    <input matInput id="address" type="text" formControlName="address">
+
+    <label for="age">Age: </label>
+    <input matInput id="age" min="18" type="number" formControlName="age">
+
+    <label for="email">Email: </label>
+    <input matInput id="email" type="email" formControlName="email">
+
+    <label for="phone">Phone: </label>
+    <input matInput id="phone" type="phone" formControlName="phone">
+
+    <label for="bloodgroup">Blood Group: </label>
+    <select id="bloodgroup" (change)="onBloodGroupSelectChange($event)" formControlName="bloodgroup">
+        <option *ngFor="let bloodgroup of bloodgroups" [value]="bloodgroup">{{ bloodgroup }}</option>
+    </select>
+  
+    <label for="hasDonated">Have you donated blood before?</label>
+    <mat-slide-toggle
+          color="primary"
+          [checked]="this.DonateBloodForm.get('hasDonated')?.value"
+          formControlName="hasDonated">
+    </mat-slide-toggle>
+
+    <button mat-raised-button color="primary" (click)="onDonationFormSubmit()">Submit</button>
+</form>

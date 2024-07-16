@@ -1,0 +1,5 @@
+<div class="orders-page">
+    <h1 class="mat-h1">Upcoming Reservations</h1>
+
+    <paginated-table-reservations [data]="reservationData" (reserveEvent)="completePurchase($event)"></paginated-table-reservations>
+</div>

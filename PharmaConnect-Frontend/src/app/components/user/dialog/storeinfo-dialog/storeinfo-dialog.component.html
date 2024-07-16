@@ -1,0 +1,69 @@
+<div class="title">
+    <h1 mat-dialog-title>{{store.store_name}}</h1>
+    <mat-icon class="cross" (click)="close()">close</mat-icon>
+</div>
+<mat-dialog-content class="mat-typography">
+    <h2 class="subtitle">Details</h2>
+    <div class="details">
+            <p><b>Address:</b> {{store.address}}, {{store.zipcode}}</p>
+            <div *ngIf="profileDetails?.working_hours"><b>Working Hours:</b> 
+                <div>Monday: {{working_hours['monday']}}</div>
+                <div>Tuesday: {{working_hours['tuesday']}}</div>
+                <div>Wednesday: {{working_hours['wednesday']}}</div>
+                <div>Thursday: {{working_hours['thursday']}}</div>
+                <div>Friday: {{working_hours['friday']}}</div>
+                <div>Saturday: {{working_hours['saturday']}}</div>
+                <div>Sunday: {{working_hours['sunday']}}</div>
+            </div>
+            <div *ngIf="!profileDetails?.working_hours"><b>Working Hours:</b> 
+                Not provided by the store
+            </div>
+    </div>
+    <hr />
+    <h2 class="subtitle">Contact</h2>
+    <div class="manager">
+        <div class="store-section">
+            <mat-icon aria-hidden="false" aria-label="Manager icon" fontIcon="manager"></mat-icon>
+            <p>{{store.manager_name}}</p>
+        </div>
+        <div class="store-section">
+            <mat-icon aria-hidden="false" aria-label="Email icon" fontIcon="email"></mat-icon>
+            <p>{{store.email}}</p>
+        </div>
+        <div class="store-section">
+            <mat-icon aria-hidden="false" aria-label="Phone icon" fontIcon="phone"></mat-icon>
+            <p>{{store.phone}}</p>
+        </div>
+    </div>
+    <div *ngIf="!reviewGiven">
+        <hr />
+        <h2 class="subtitle">Leave a rating</h2>
+        <div class="reviews">
+            <app-add-star-rating [filledStars]="0" [unfilledStars]="5" (rate)="rate($event)"></app-add-star-rating>
+            <textarea placeholder="Enter your review" [(ngModel)]="comment" value="comment"></textarea>
+
+            <button mat-raised-button [disabled]="this.rating === 0" color="primary" style="margin-left: 0;" (click)="submit()">Submit</button>
+        </div>
+    </div>
+    <hr />
+    <div  *ngIf="reviewList.length > 0">
+        <h2 class="subtitle">Customer Reviews</h2>
+        <div class="avg-rating">
+            <app-display-star-rating style="margin-right: 12px;" [filledStars]="roundedAverageRating" [unfilledStars]="5-roundedAverageRating"></app-display-star-rating>
+            <p><b>{{this.averageRating}} out of 5</b></p>
+        </div>
+        <div class="reviewList">
+            <div *ngFor="let review of reviewList" class="reviewItem">
+                <div class="reviewer">
+                    <div><b>{{review.userName}}</b></div>
+                    <app-display-star-rating [filledStars]="review.rating" [unfilledStars]="5 - review.rating"></app-display-star-rating>
+                </div>
+                <p style="font-size: 14px; color: gray;">Reviewed on {{review.reviewDate}}</p>
+                <p style="font-size: 14px; color: black;">{{review.message}}</p>
+                <hr />
+            </div>
+        </div>
+    </div>
+    
+    
+</mat-dialog-content>

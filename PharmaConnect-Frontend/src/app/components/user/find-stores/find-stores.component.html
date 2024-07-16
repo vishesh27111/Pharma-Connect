@@ -1,0 +1,15 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+
+<div class="find-stores-page" *ngIf="!isLoading">
+    <h1>Find Stores</h1>
+    <div class="filter-by">
+        <label>Filter by:</label>
+        <mat-radio-group aria-label="Select an option" color="primary" [(ngModel)]="filterBy" (change)="onFilterChange()">
+            <mat-radio-button value="POPULARITY">Popularity</mat-radio-button>
+            <mat-radio-button value="DISTANCE">Distance</mat-radio-button>
+        </mat-radio-group>
+    </div>
+    <div *ngFor="let store of medicalStores">
+        <app-store-list-item [store]="store"></app-store-list-item>
+    </div>
+</div>

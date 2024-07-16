@@ -1,0 +1,61 @@
+<div class="mat-elevation-z8">
+    <table mat-table matSort [dataSource]="dataSource">
+  
+      <!-- Position Column -->
+      <ng-container  matColumnDef="reservationId">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Order ID</th>
+        <td mat-cell *matCellDef="let element">{{element['reservationId']}}</td>
+      </ng-container>
+
+      <ng-container  matColumnDef="userName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>User Name</th>
+        <td mat-cell *matCellDef="let element">{{element['userName']}}</td>
+      </ng-container>
+
+      <ng-container  matColumnDef="drugName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Drug Name</th>
+        <td mat-cell *matCellDef="let element">{{element['drugName']}}</td>
+      </ng-container>
+
+      <ng-container  matColumnDef="unitPrice">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Unit Price</th>
+        <td mat-cell *matCellDef="let element">${{element['unitPrice']}}</td>
+      </ng-container>
+
+      <ng-container  matColumnDef="quantityNeeded">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Quantity</th>
+        <td mat-cell *matCellDef="let element"> {{element['quantityNeeded']}} </td>
+      </ng-container>
+
+      <ng-container  matColumnDef="lockAcquiredTime">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Date of Purchase</th>
+        <td mat-cell *matCellDef="let element">{{element['lockAcquiredTime'].split('T')[0]}} {{element['lockAcquiredTime'].split('T')[1]}}</td>
+      </ng-container>
+
+      <ng-container  matColumnDef="releaseTime">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Reserved Until</th>
+        <td mat-cell *matCellDef="let element">{{element['releaseTime'].split('T')[0]}} {{element['releaseTime'].split('T')[1]}}</td>
+      </ng-container>
+
+      <ng-container  matColumnDef="totalBill">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>Total Bill</th>
+        <td mat-cell *matCellDef="let element">${{element['unitPrice'] * element['quantityNeeded']}}</td>
+      </ng-container>
+
+      <ng-container matColumnDef="update">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-raised-button color="primary" (click)="completePurchase(row.reservationId)">Complete</button>
+        </td>
+      </ng-container>
+  
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  
+    <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                   showFirstLastButtons
+                   aria-label="Select page of medicines">
+    </mat-paginator>
+  </div>
+  

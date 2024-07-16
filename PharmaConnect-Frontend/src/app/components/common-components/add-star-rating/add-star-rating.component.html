@@ -1,0 +1,8 @@
+<div class="stars">
+    <ng-container *ngFor="let star of filledStarsArray;">
+        <mat-icon aria-hidden="false" class="filled" aria-label="Star icon" (click)="selected(star)" fontIcon="star"></mat-icon>
+    </ng-container>
+    <ng-container *ngFor="let star of unfilledStarsArray;">
+        <mat-icon aria-hidden="false" class="unfilled" aria-label="Star icon" (click)="selected(star)" fontIcon="star"></mat-icon>
+    </ng-container>
+</div>

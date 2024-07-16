@@ -1,0 +1,22 @@
+<div class="grid-container">
+    <h1 class="mat-h1">Blood Donation</h1>
+    <hr/>
+    <div class="dashboard-card">
+      <div class="ad" *ngFor="let center of DonationServices, index as i">
+        <h1>{{center.name}}</h1>
+        <h2>{{center.type}}</h2>
+        <div class="info">
+            <ul>
+              <li><mat-icon>phone</mat-icon>&nbsp;&nbsp;{{center.phone}}</li>
+              <li><mat-icon>link</mat-icon>&nbsp;&nbsp;<a>{{center.website}}</a></li>
+            </ul>
+            <ul>
+              <li><mat-icon>my_location</mat-icon>{{center.address}}</li>
+            </ul>
+        </div>
+        <a class="donate-blood-form-link" (click)="donateBlood(center)">
+          Click to register for blood donation
+        </a>
+      </div>
+    </div>
+</div>

@@ -1,0 +1,45 @@
+<!-- <h2 mat-dialog-title>Add new medicine</h2>
+<mat-dialog-content>
+
+<form [formGroup]="NewMedForm">
+    <label for="name">Medicine</label><br/>
+    <input formControlName="name" type="text" id="name" placeholder="Enter medicine name"/><br/>
+    <label for="count">Quantity</label><br/>
+    <input formControlName="count" type="number" id="count" placeholder="Quantity" min="0"/><br/>
+    <mat-dialog-actions>
+        <button class="mat-raised-button"(click)="close()">Close</button>
+        <button class="mat-raised-button mat-primary"(click)="save()">Save</button>
+    </mat-dialog-actions>
+</form>
+</mat-dialog-content>
+
+ -->
+
+<h1 mat-dialog-title>Add New Medicine</h1>
+<div mat-dialog-content>
+    <form [formGroup]="NewMedForm">
+        <mat-form-field>
+            <mat-label>Drug Code</mat-label>
+            <input matInput formControlName="code" id="code">
+        </mat-form-field><br/>
+        <mat-form-field>
+            <mat-select>
+                <mat-option *ngFor="let drug of data" (onSelectionChange)="onDrugNameSelected(drug)" [value]="drug.drug_name">
+                  {{drug.drug_name}}
+                </mat-option>
+            </mat-select>
+        </mat-form-field><br/>
+        <mat-form-field>
+            <mat-label>Quantity</mat-label>
+            <input matInput formControlName="quantity" type="number" id="quantity" min="1">
+        </mat-form-field><br/>
+        <mat-form-field>
+            <mat-label>Unit Price</mat-label>
+            <input matInput formControlName="unit_price" type="number" id="unit_price" min="0">
+        </mat-form-field>
+    </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="close()">Close</button>
+  <button mat-button (click)="save()" cdkFocusInitial>Save</button>
+</div>
